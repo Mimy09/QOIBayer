@@ -8,9 +8,23 @@ mod qoi_types;
 use qoi_encode::*;
 mod qoi_encode;
 
+// Release Timing
+// Elapsed: 535.14µs
+// Elapsed: 507.71µs
+// Elapsed: 718.38µs
+// Elapsed: 523.31µs
+// Elapsed: 525.08µs
+
 fn main() {
     let mut encoder = QOIEncoder::default();
+    use std::time::Instant;
+    let now = Instant::now();
+
     encoder.open("data/lena_rggb.png");
+
+    let elapsed = now.elapsed();
+    println!("Elapsed: {:.2?}", elapsed);
+
     encoder.save("data/lena_rggb.qoi");
 }
 
