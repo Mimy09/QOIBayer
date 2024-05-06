@@ -118,6 +118,9 @@ impl QOIEncoder {
             .decode()
             .unwrap_or_else(|e| panic!("Can't decade file {}", e));
         
+        use std::time::Instant;
+        let now = Instant::now();
+
         self._header = crate::QOIHeader::new(img.width(), img.height());
         
         let img_raw = img.as_bytes().to_owned();
@@ -152,6 +155,11 @@ impl QOIEncoder {
     
             self._idx += 4;
         }
+
+
+        let elapsed = now.elapsed();
+        println!("Elapsed: {:.2?}", elapsed);
+
     }
 
     pub fn save(&mut self, path: &'static str) {
